@@ -1,0 +1,24 @@
+Hello everyone this is a simple student form to demostrate blockchain as a backend
+
+To run the student form in complete working follow the steps
+
+	1. RUN ganache-cli in your computer, to RUN ganache-cli follow the commands,
+		- install npm
+		- install node.js
+		- sudo apt-get install build-essential python
+		- mkdir Ethereum
+		- cd Ethereum
+		- mkdir node_modules
+		- npm istall ganache-cli web3@0.20.2
+		- node_modules/.bin/ganache-cli
+	2. OPEN Remix solidity IDE "https://remix.ethereum.org" in google.
+	3. COPY the code from instructor.sol and PASTE it in the Remix IDE. 
+	4. RUN the IDE in web3provide and DEPLOY the contract.
+	5. COPY the ABI form of smart contract and PASTE it in .html code.
+		- At Line-45 find var contrct = web3.eth.contract() function.
+		- GOTO Remix IDE CLICK on compile GOTO to details find ABI and copy it.
+		- OPEN JSON minfiy website "https://www.cleancss.com/json-minify/" in google.
+		- COPY the minified JSON format of the code and PASTE it in the above function.
+	6. COPY the deployed contract ADDRESS and PASTE it in the .html code.
+		- At line-47 "contract.at("0x25d49b3b332916b8a5c3962f404a8330d4f2adfe");" find 			  this piece of code and paste the 32 byte address in contract.at() function.
+	7. Now you can interact with smart contract through the front-end form.

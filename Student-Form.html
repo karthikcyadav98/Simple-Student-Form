@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+</head>
+<body>
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="col-lg-offset-3 col-lg-6">
+				<h1>Instructor Form</h1>
+				<form>
+				  <div class="form-group">
+				    <label>Full Name</label>
+				    <input type="text" class="form-control" id="fname">
+				  </div>
+				  <div class="form-group">
+				    <label>Age:</label>
+				    <input type="number" class="form-control" id="age">
+				  </div>
+				  <button type="button" id="btn" class="btn btn-default">Submit</button>
+				</form>
+
+				<h1>Instructor Details</h1>
+				<h3 id="details"></h3>
+			</div>
+		</div>
+	</div>	
+
+	<script type="text/javascript">
+			web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+		
+			console.log(web3); // {eth: .., shh: ...} // it's here!
+
+			var contract = web3.eth.contract([{"constant":false,"inputs":[{"name":"_fname","type":"string"},{"name":"_age","type":"uint256"}],"name":"setInstructor","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getInstructor","outputs":[{"name":"","type":"string"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"name","type":"string"},{"indexed":false,"name":"age","type":"uint256"}],"name":"Instructorevent","type":"event"}]);
+
+			var instance = contract.at("0x25d49b3b332916b8a5c3962f404a8330d4f2adfe");
+
+			web3.eth.defaultAccount = web3.eth.accounts[1];
+
+
+			$("#btn").click(function(){
+				instance.setInstructor($("#fname").val(), $("#age").val(), function(error, result){
+					if(!error){
+						alert("Success");
+						console.log(result);
+					} else {
+						console.log(error);
+					}
+				})
+			})
+
+			instance.getInstructor(function(error, result){
+				if(!error){
+					$("#details").html("Full Name : "+result[0]+" Age : "+ result[1] );
+				} else {
+					console.log(error);
+				}
+
+			})
+
+	</script>
+</body>
+</html>
